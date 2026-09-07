@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tìm danh sách thông báo thuế</title>
+  <title>Đếm thông báo đối tác nhận thành công</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fb; color: #1f2937; }
     .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
@@ -24,15 +24,15 @@
   <div class="wrap">
 
     <div class="card">
-      <h1>Admin API - Tìm danh sách thông báo thuế</h1>
-      <p>Tìm kiếm danh sách thông báo thuế theo bộ lọc, searchText và phân trang.</p>
+      <h1>Admin API - Đếm thông báo đối tác nhận thành công</h1>
+      <p>Đếm số lượng thông báo thuế mà đối tác đã nhận thành công.</p>
       <p><a href="./index.html">Về module TaxCDSTaxNotification</a></p>
     </div>
 
     <div class="card">
       <h2>Endpoint</h2>
       <table>
-        <tr><th>URL</th><td>/TaxCDSTaxNotification/find</td></tr>
+        <tr><th>URL</th><td>/TaxCDSTaxNotification/countNotificationsPartnerReceivedSuccess</td></tr>
         <tr><th>Method</th><td>POST</td></tr>
       </table>
     </div>
@@ -49,39 +49,16 @@
       <h2>Body schema</h2>
       <table>
         <tr><th>Field</th><th>Type</th><th>Required</th><th>Rule</th><th>Mô tả</th></tr>
-        <tr><td>filter</td><td>object</td><td>No</td><td>default {}</td><td>Bộ lọc tìm kiếm.</td></tr>
-        <tr><td>filter.taxNotiNotificationCode</td><td>string</td><td>No</td><td>allow('')</td><td>Lọc theo mã thông báo.</td></tr>
-        <tr><td>filter.taxNotiPayerTaxCode</td><td>string</td><td>No</td><td>allow('')</td><td>Lọc theo mã số thuế.</td></tr>
-        <tr><td>filter.taxNotiPayerIdentity</td><td>string</td><td>No</td><td>allow('')</td><td>Lọc theo CCCD/CMND.</td></tr>
-        <tr><td>filter.taxNotiPayerName</td><td>string</td><td>No</td><td>allow('')</td><td>Lọc theo tên người nộp thuế.</td></tr>
-        <tr><td>filter.taxNotiDocumentCode</td><td>string</td><td>No</td><td>allow('')</td><td>Lọc theo mã văn bản.</td></tr>
-        <tr><td>filter.taxNotiDocumentTitle</td><td>string</td><td>No</td><td>allow('')</td><td>Lọc theo tiêu đề văn bản.</td></tr>
-        <tr><td>searchText</td><td>string</td><td>No</td><td>default ''</td><td>Chuỗi tìm kiếm tổng quát.</td></tr>
-        <tr><td>skip</td><td>number</td><td>No</td><td>min(0), default 0</td><td>Số bản ghi bỏ qua.</td></tr>
-        <tr><td>limit</td><td>number</td><td>No</td><td>max(100), default 20</td><td>Số bản ghi tối đa trả về.</td></tr>
-        <tr><td>order</td><td>object</td><td>No</td><td>optional</td><td>Thông tin sắp xếp.</td></tr>
-        <tr><td>order.key</td><td>string</td><td>No</td><td>default createdAt, allow('')</td><td>Trường sắp xếp.</td></tr>
-        <tr><td>order.value</td><td>string</td><td>No</td><td>default desc, allow('')</td><td>Chiều sắp xếp.</td></tr>
+        <tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Không có tham số.</td></tr>
       </table>
     </div>
 
     <div class="card">
       <h2 style="display:flex;align-items:center;gap:8px;">Sample Request <button id="copySampleBtn" title="Copy sang clipboard" style="background:none;border:1px solid #dbe3ef;border-radius:6px;padding:4px 8px;cursor:pointer;display:inline-flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0b63ce" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg></button></h2>
-      <pre id="curlText">curl --location 'http://127.0.0.1:4001/TaxCDSTaxNotification/find' \
+      <pre id="curlText">curl --location 'http://127.0.0.1:4001/TaxCDSTaxNotification/countNotificationsPartnerReceivedSuccess' \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Bearer &lt;staff_token&gt;' \
-  --data '{
-    "filter": {
-      "taxNotiPayerTaxCode": "0312345678"
-    },
-    "searchText": "",
-    "skip": 0,
-    "limit": 20,
-    "order": {
-      "key": "createdAt",
-      "value": "desc"
-    }
-  }'</pre>
+  --data '{}'</pre>
     </div>
 
     <div class="card">
@@ -91,15 +68,7 @@
   "error": null,
   "message": "Success",
   "data": {
-    "data": [
-      {
-        "taxCDSTaxNotificationId": 1,
-        "taxNotiNotificationCode": "TAXCDS-NOTI-DEBT-001",
-        "taxNotiTitle": "Thông báo nợ thuế và chậm nộp",
-        "taxNotiPayerTaxCode": "0312345678"
-      }
-    ],
-    "totalNextPage": 0
+    "total": 12890
   }
 }</pre>
     </div>
@@ -108,7 +77,6 @@
       <h2>Mã lỗi</h2>
       <table>
         <tr><th style="width:100px">HTTP</th><th style="width:35%">Mã lỗi</th><th>Mô tả</th></tr>
-        <tr><td>400</td><td><em>Validation Error</em></td><td>Payload không đúng schema.</td></tr>
         <tr><td>401</td><td><code>UNAUTHORIZED</code></td><td>Thiếu hoặc sai Authorization token.</td></tr>
         <tr><td>500</td><td><code>UNKNOWN_ERROR</code></td><td>Lỗi không xác định.</td></tr>
       </table>
@@ -128,7 +96,6 @@
         <li>Login endpoint lấy token: POST /Staff/loginStaff</li>
         <li>username test: string</li>
         <li>password test: string</li>
-        <li>taxNotiPayerTaxCode test: 0312345678</li>
       </ul>
       <p>Cần thay bằng dữ liệu môi trường thật khi tích hợp.</p>
     </div>
